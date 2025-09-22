@@ -29,6 +29,7 @@ The solution consists of three main components:
 
 - AWS account with appropriate permissions
 - AWS CLI configured with admin access
+- AWS SAM CLI
 - Python 3.10 or higher
 - Docker Desktop or Finch installed (for local testing and deployment)
 - Bedrock model access enabled in your AWS account
@@ -55,9 +56,10 @@ This deploys the FastAPI application using AWS SAM and creates all necessary res
 Next, configure the AWS Bedrock AgentCore Gateway to expose the insurance API as an MCP tool:
 
 ```bash
-cd ../cloud_mcp_server
+cd ../../cloud_mcp_server
 
 # Setup AgentCore Gateway with OpenAPI integration
+pip install dotenv bedrock_agentcore_starter_toolkit
 python agentcore_gateway_setup_openapi.py
 ```
 
