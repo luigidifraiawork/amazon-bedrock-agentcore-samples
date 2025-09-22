@@ -51,12 +51,18 @@ chmod +x ./deploy.sh
 
 This deploys the FastAPI application using AWS SAM and creates all necessary resources including Lambda function, API Gateway, and permissions.
 
+Create an API key, a usage plan, and associate the Cloud Insurance API stage to the usage plan.
+
 ### 2. Setup the MCP Server with AgentCore Gateway
 
 Next, configure the AWS Bedrock AgentCore Gateway to expose the insurance API as an MCP tool:
 
 ```bash
 cd ../../cloud_mcp_server
+
+# Copy example environment file and edit with your values
+cp .env_example .env
+nano .env
 
 # Setup AgentCore Gateway with OpenAPI integration
 pip install dotenv bedrock_agentcore_starter_toolkit
@@ -67,7 +73,7 @@ This creates an AgentCore Gateway with OAuth authorization that provides an MCP 
 
 ### 3. Deploy the Strands Insurance Agent
 
-Finally, deploy the agent that will interact with the MCP Gateway:
+Finally, deploy the agent that will interact with the MCP Gateway, using `bedrock-agentcore-insurance_agent_strands` as the ECR Repository Name:
 
 ```bash
 cd ../cloud_strands_insurance_agent
@@ -215,10 +221,24 @@ When you're done using the agentcore app, follow these steps to clean up resourc
    aws bedrock-agentcore-control delete-oauth2-credential-provider --credential-provider-identifier your-provider-id
    ```
 
-4. **Cognito Resources**:
+4. **Delete API Key Credential Providers**:
+   ```bash
+   # List API Key credential providers
+   aws bedrock-agentcore-control list-api-key-credential-providers
+
+   # Delete API Key credential provider
+   aws bedrock-agentcore-control delete-api-key-credential-provider --name your-provider-name
+   ```
+
+5. **Cognito Resources**:
    ```bash
    aws cognito-idp delete-user-pool-client --user-pool-id your-user-pool-id --client-id your-app-client-id
    aws cognito-idp delete-user-pool --user-pool-id your-user-pool-id
+   ```
+
+6. **Cloud Insurance API**:
+   ```bash
+   aws cloudformation delete-stack --stack-name your-stack-name
    ```
 
 ## Next Steps
