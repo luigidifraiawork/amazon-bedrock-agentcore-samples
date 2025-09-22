@@ -380,8 +380,8 @@ When you're done using the agentcore app, follow these steps to clean up resourc
    # List agent runtime endpoints
    aws bedrock-agentcore-control list-agent-runtime-endpoints --agent-runtime-id your-agent-runtime-id
    
-   # Delete agent runtime endpoints
-   aws bedrock-agentcore-control delete-agent-runtime-endpoint --agent-runtime-id your-agent-runtime-id --agent-runtime-endpoint-identifier your-endpoint-id
+   # Delete non-default agent runtime endpoints
+   aws bedrock-agentcore-control delete-agent-runtime-endpoint --agent-runtime-id your-agent-runtime-id --endpoint-name your-endpoint-name
    
    # Delete agent runtime
    aws bedrock-agentcore-control delete-agent-runtime --agent-runtime-id your-agent-runtime-id
