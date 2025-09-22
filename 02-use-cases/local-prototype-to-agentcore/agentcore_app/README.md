@@ -212,16 +212,7 @@ When you're done using the agentcore app, follow these steps to clean up resourc
    aws bedrock-agentcore-control delete-agent-runtime --agent-runtime-identifier your-agent-runtime-id
    ```
 
-3. **Delete OAuth2 Credential Providers**:
-   ```bash
-   # List OAuth2 credential providers
-   aws bedrock-agentcore-control list-oauth2-credential-providers
-   
-   # Delete OAuth2 credential provider
-   aws bedrock-agentcore-control delete-oauth2-credential-provider --credential-provider-identifier your-provider-id
-   ```
-
-4. **Delete API Key Credential Providers**:
+3. **Delete API Key Credential Providers**:
    ```bash
    # List API Key credential providers
    aws bedrock-agentcore-control list-api-key-credential-providers
@@ -230,13 +221,13 @@ When you're done using the agentcore app, follow these steps to clean up resourc
    aws bedrock-agentcore-control delete-api-key-credential-provider --name your-provider-name
    ```
 
-5. **Cognito Resources**:
+4. **Cognito Resources**:
    ```bash
    aws cognito-idp delete-user-pool-client --user-pool-id your-user-pool-id --client-id your-app-client-id
    aws cognito-idp delete-user-pool --user-pool-id your-user-pool-id
    ```
 
-6. **Cloud Insurance API**:
+5. **Cloud Insurance API**:
    ```bash
    aws cloudformation delete-stack --stack-name your-stack-name
    ```
