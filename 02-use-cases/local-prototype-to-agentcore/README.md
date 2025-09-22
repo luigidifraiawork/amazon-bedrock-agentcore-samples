@@ -378,13 +378,13 @@ When you're done using the agentcore app, follow these steps to clean up resourc
    aws bedrock-agentcore-control list-agent-runtimes
    
    # List agent runtime endpoints
-   aws bedrock-agentcore-control list-agent-runtime-endpoints --agent-runtime-identifier your-agent-runtime-id
+   aws bedrock-agentcore-control list-agent-runtime-endpoints --agent-runtime-id your-agent-runtime-id
    
    # Delete agent runtime endpoints
-   aws bedrock-agentcore-control delete-agent-runtime-endpoint --agent-runtime-identifier your-agent-runtime-id --agent-runtime-endpoint-identifier your-endpoint-id
+   aws bedrock-agentcore-control delete-agent-runtime-endpoint --agent-runtime-id your-agent-runtime-id --agent-runtime-endpoint-identifier your-endpoint-id
    
    # Delete agent runtime
-   aws bedrock-agentcore-control delete-agent-runtime --agent-runtime-identifier your-agent-runtime-id
+   aws bedrock-agentcore-control delete-agent-runtime --agent-runtime-id your-agent-runtime-id
    ```
 
 3. **Delete OAuth2 Credential Providers**:
