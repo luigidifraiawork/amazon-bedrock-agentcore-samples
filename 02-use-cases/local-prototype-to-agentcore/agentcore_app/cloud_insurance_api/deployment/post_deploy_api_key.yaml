@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Post-deploy stack to create API Key and Usage Plan for existing SAM-managed API Gateway
+
+Parameters:
+  ApiId:
+    Type: String
+    Description: The physical ID of the API Gateway created by the SAM stack
+  StageName:
+    Type: String
+    Default: dev
+    Description: The stage of the API to attach the usage plan to
+    AllowedValues:
+      - dev
+      - test
+      - prod
+
+Resources:
+  # ------------------------
+  # API Key
+  # ------------------------
+  InsuranceApiKey:
+    Type: AWS::ApiGateway::ApiKey
+    Properties:
+      Name: !Sub "insurance-api-key-${StageName}"
+      Enabled: true
+      StageKeys:
+        - RestApiId: !Ref ApiId
+          StageName: !Ref StageName
+
+  # ------------------------
+  # Usage Plan
+  # ------------------------
+  InsuranceApiUsagePlan:
+    Type: AWS::ApiGateway::UsagePlan
+    Properties:
+      UsagePlanName: !Sub "insurance-api-usageplan-${StageName}"
+      Description: !Sub "Usage plan for insurance API (${StageName})"
+      ApiStages:
+        - ApiId: !Ref ApiId
+          Stage: !Ref StageName
+      Throttle:
+        RateLimit: 50
+        BurstLimit: 100
+      Quota:
+        Limit: 1000
+        Period: MONTH
+
+  # ------------------------
+  # Usage Plan Key
+  # ------------------------
+  InsuranceApiUsagePlanKey:
+    Type: AWS::ApiGateway::UsagePlanKey
+    Properties:
+      KeyId: !Ref InsuranceApiKey
+      KeyType: API_KEY
+      UsagePlanId: !Ref InsuranceApiUsagePlan
