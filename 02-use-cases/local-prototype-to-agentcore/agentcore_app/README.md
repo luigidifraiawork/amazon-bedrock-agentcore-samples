@@ -51,8 +51,6 @@ chmod +x ./deploy.sh
 
 This deploys the FastAPI application using AWS SAM and creates all necessary resources including Lambda function, API Gateway, and permissions.
 
-Create an API key, a usage plan associated to your API/stage, and link the API key to the usage plan.
-
 ### 2. Setup the MCP Server with AgentCore Gateway
 
 Next, configure the AWS Bedrock AgentCore Gateway to expose the insurance API as an MCP tool:
