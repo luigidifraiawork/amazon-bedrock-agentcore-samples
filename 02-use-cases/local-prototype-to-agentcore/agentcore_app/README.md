@@ -51,7 +51,7 @@ chmod +x ./deploy.sh
 
 This deploys the FastAPI application using AWS SAM and creates all necessary resources including Lambda function, API Gateway, and permissions.
 
-Create an API key, a usage plan, and associate the Cloud Insurance API stage to the usage plan.
+Create an API key, a usage plan associated to your API/stage, and link the API key to the usage plan.
 
 ### 2. Setup the MCP Server with AgentCore Gateway
 
