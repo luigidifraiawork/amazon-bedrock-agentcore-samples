@@ -52,8 +52,14 @@ Outputs:
   
   InsuranceApiGateway:
     Description: API Gateway endpoint URL
-    Value: !Sub https://${InsuranceApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentType}/
+    Value: !Sub https://${InsuranceApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentType}
     
   InsuranceApiGatewayConsole:
     Description: API Gateway console URL
     Value: !Sub https://console.aws.amazon.com/apigateway/home?region=${AWS::Region}#/apis/${InsuranceApiGateway}/resources
+
+  InsuranceApiGatewayId:
+    Description: API Gateway ID
+    Value: !Ref InsuranceApiGateway
+    Export:
+      Name: !Sub "InsuranceApiGatewayId-${EnvironmentType}"
