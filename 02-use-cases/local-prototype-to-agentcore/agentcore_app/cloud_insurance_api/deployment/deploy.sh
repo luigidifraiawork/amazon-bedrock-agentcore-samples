@@ -77,4 +77,16 @@ sam deploy \
     --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
     --parameter-overrides EnvironmentType="$STAGE"
 
+# Deploy the API key and usage plan
+echo "Deploying the API key and usage plan..."
+API_ID=$(aws cloudformation list-exports \
+    --query "Exports[?Name=='InsuranceApiGatewayId-${STAGE}'].Value" \
+    --output text)
+
+sam deploy \
+    --stack-name insurance-api-key-usageplan-$STAGE \
+    --template-file post_deploy_api_key.yaml \
+    --capabilities CAPABILITY_IAM \
+    --parameter-overrides ApiId="$API_ID" StageName="$STAGE"
+
 echo "=== Deployment Complete ==="
