@@ -52,7 +52,7 @@ Outputs:
   
   InsuranceApiGateway:
     Description: API Gateway endpoint URL
-    Value: !Sub https://${InsuranceApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentType}/
+    Value: !Sub https://${InsuranceApiGateway}.execute-api.${AWS::Region}.amazonaws.com/${EnvironmentType}
     
   InsuranceApiGatewayConsole:
     Description: API Gateway console URL
