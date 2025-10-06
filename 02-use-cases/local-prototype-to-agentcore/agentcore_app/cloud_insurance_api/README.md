@@ -213,7 +213,7 @@ When you're done with the Insurance API application, follow these steps to clean
    aws cloudformation list-stacks --query "StackSummaries[?contains(StackName,'insurance-api')].StackName" --output text
    
    # Delete the stack
-   aws cloudformation delete-stack --stack-name insurance-api-stack-dev
+   aws cloudformation delete-stack --stack-name insurance-api-dev
    ```
 
 2. **Delete the S3 Deployment Bucket** (if it's no longer needed):
@@ -222,10 +222,10 @@ When you're done with the Insurance API application, follow these steps to clean
    aws s3 ls | grep insurance-api
    
    # Remove all files from the bucket first
-   aws s3 rm s3://insurance-api-deployment-bucket-1234 --recursive
+   aws s3 rm s3://insurance-api-stage-accountid-region --recursive
    
    # Delete the empty bucket
-   aws s3api delete-bucket --bucket insurance-api-deployment-bucket-1234
+   aws s3api delete-bucket --bucket insurance-api-stage-accountid-region
    ```
 
 3. **Verify Resource Deletion**:
@@ -243,7 +243,7 @@ When you're done with the Insurance API application, follow these steps to clean
    aws logs describe-log-groups --query "logGroups[?contains(logGroupName,'/aws/lambda/insurance-api')].logGroupName" --output text
    
    # Delete the log group
-   aws logs delete-log-group --log-group-name /aws/lambda/insurance-api-function-dev
+   aws logs delete-log-group --log-group-name /aws/lambda/insurance-api-dev
    ```
 
-Note: Replace placeholder values like `insurance-api-stack-dev`, `insurance-api-deployment-bucket-1234`, and `/aws/lambda/insurance-api-function-dev` with your actual resource names.
+Note: Replace placeholder values like `insurance-api-dev`, `insurance-api-stage-accountid-region`, and `/aws/lambda/insurance-api-dev` with your actual resource names.
