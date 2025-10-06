@@ -29,6 +29,7 @@ The solution consists of three main components:
 
 - AWS account with appropriate permissions
 - AWS CLI configured with admin access
+- AWS SAM CLI
 - Python 3.10 or higher
 - Docker Desktop or Finch installed (for local testing and deployment)
 - Bedrock model access enabled in your AWS account
@@ -55,9 +56,13 @@ This deploys the FastAPI application using AWS SAM and creates all necessary res
 Next, configure the AWS Bedrock AgentCore Gateway to expose the insurance API as an MCP tool:
 
 ```bash
-cd ../cloud_mcp_server
+cd ../../cloud_mcp_server
 
-# Setup AgentCore Gateway with OpenAPI integration
+# Copy example environment file and edit with your values
+cp .env_example .env
+nano .env
+
+# Setup AgentCore Gateway with OpenAPI integration (requires `dotenv` and `bedrock_agentcore_starter_toolkit`)
 python agentcore_gateway_setup_openapi.py
 ```
 
@@ -65,7 +70,7 @@ This creates an AgentCore Gateway with OAuth authorization that provides an MCP 
 
 ### 3. Deploy the Strands Insurance Agent
 
-Finally, deploy the agent that will interact with the MCP Gateway:
+Finally, deploy the agent that will interact with the MCP Gateway, using `bedrock-agentcore-insurance_agent_strands` as the ECR Repository Name:
 
 ```bash
 cd ../cloud_strands_insurance_agent
@@ -195,13 +200,13 @@ When you're done using the agentcore app, follow these steps to clean up resourc
    aws bedrock-agentcore-control list-agent-runtimes
    
    # List agent runtime endpoints
-   aws bedrock-agentcore-control list-agent-runtime-endpoints --agent-runtime-identifier your-agent-runtime-id
+   aws bedrock-agentcore-control list-agent-runtime-endpoints --agent-runtime-id your-agent-runtime-id
    
-   # Delete agent runtime endpoints
-   aws bedrock-agentcore-control delete-agent-runtime-endpoint --agent-runtime-identifier your-agent-runtime-id --agent-runtime-endpoint-identifier your-endpoint-id
+   # Delete non-default agent runtime endpoints, if applicable
+   aws bedrock-agentcore-control delete-agent-runtime-endpoint --agent-runtime-id your-agent-runtime-id --endpoint-name your-endpoint-name
    
    # Delete agent runtime
-   aws bedrock-agentcore-control delete-agent-runtime --agent-runtime-identifier your-agent-runtime-id
+   aws bedrock-agentcore-control delete-agent-runtime --agent-runtime-id your-agent-runtime-id
    ```
 
 3. **Delete OAuth2 Credential Providers**:
@@ -217,6 +222,11 @@ When you're done using the agentcore app, follow these steps to clean up resourc
    ```bash
    aws cognito-idp delete-user-pool-client --user-pool-id your-user-pool-id --client-id your-app-client-id
    aws cognito-idp delete-user-pool --user-pool-id your-user-pool-id
+   ```
+
+5. **Cloud Insurance API**:
+   ```bash
+   aws cloudformation delete-stack --stack-name your-stack-name
    ```
 
 ## Next Steps
