@@ -44,6 +44,8 @@ Resources:
         AllowMethods: "'*'"
         AllowHeaders: "'Content-Type,Authorization'"
         AllowOrigin: "'*'"
+      Auth:
+          ApiKeyRequired: true
 
 Outputs:
   InsuranceApiFunction:
