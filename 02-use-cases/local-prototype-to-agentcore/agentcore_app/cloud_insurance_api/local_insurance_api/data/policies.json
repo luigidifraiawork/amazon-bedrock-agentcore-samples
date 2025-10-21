@@ -4,8 +4,8 @@
             "id": "policy-001",
             "customer_id": "cust-001",
             "type": "auto",
-            "start_date": "2024-01-15",
-            "end_date": "2025-01-15",
+            "start_date": "2025-01-15",
+            "end_date": "2026-01-15",
             "premium": 1200.0,
             "coverage": {
                 "liability": 300000,
@@ -29,8 +29,8 @@
             "id": "policy-002",
             "customer_id": "cust-002",
             "type": "auto",
-            "start_date": "2024-03-10",
-            "end_date": "2025-03-10",
+            "start_date": "2025-03-10",
+            "end_date": "2026-03-10",
             "premium": 950.0,
             "coverage": {
                 "liability": 250000,
@@ -54,8 +54,8 @@
             "id": "policy-003",
             "customer_id": "cust-003",
             "type": "auto",
-            "start_date": "2024-05-22",
-            "end_date": "2025-05-22",
+            "start_date": "2025-05-22",
+            "end_date": "2026-05-22",
             "premium": 1450.0,
             "coverage": {
                 "liability": 500000,
