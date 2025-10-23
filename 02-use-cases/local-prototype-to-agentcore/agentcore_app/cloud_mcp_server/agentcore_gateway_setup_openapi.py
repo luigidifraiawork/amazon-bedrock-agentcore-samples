@@ -54,8 +54,8 @@ print(f"Creating MCP gateway '{gateway_name}'")
 gateway = client.create_mcp_gateway(
     name=gateway_name,
     authorizer_config=cognito_response["authorizer_config"],
+    enable_semantic_search=True,
 )
-
 
 # Load the insurance API OpenAPI specification from environment or default path
 env_openapi_path = os.getenv("OPENAPI_FILE_PATH", "../cloud_insurance_api/openapi.json")
